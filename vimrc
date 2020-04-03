@@ -29,6 +29,7 @@ set expandtab
 set number
 set autoindent
 set cindent
+"set tags=./tags,tags;$HOME
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -49,6 +50,7 @@ noremap go :TlistOpen<CR>
 noremap gc :TlistClose<CR>
 
 inoremap jj <esc>
+inoremap ]] <esc>A
 
 map s <nop>
 map S :w<CR>
@@ -82,6 +84,7 @@ map qq :NERDTreeToggle<CR>
 let NERDTreeMapOpenSplit = ""
 let NERDTreeIgnore = ['\.so','\.o']
 
+
 " ==
 " == NERDTree-git
 " ==
@@ -114,7 +117,9 @@ call plug#begin('~/.vim/plugged')
 
 "=======plug
 Plug 'vim-airline/vim-airline'
-Plug 'connorholyday/vim-snazzy'
+"Plug 'connorholyday/vim-snazzy'
+"Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
 
 " File navigation
  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -157,5 +162,15 @@ Plug 'connorholyday/vim-snazzy'
  Plug 'kien/ctrlp.vim'
 call plug#end()
 
-let g:SnazzyTransparent = 1
-color snazzy
+"let g:SnazzyTransparent = 1
+let g:solarized_termcolors=256
+colorscheme solarized
+set background=dark
+let g:lightline = {
+\ 'colorscheme': 'solarized',
+\ }
+"== 
+"== ycm
+"==
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey 
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
