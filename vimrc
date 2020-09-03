@@ -1,5 +1,5 @@
 set nocompatible
-filetype on
+filetype off
 filetype indent on
 filetype plugin on
 filetype plugin indent on
@@ -32,10 +32,6 @@ set cindent
 "set tags=./tags,tags;$HOME
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
 
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
 noremap i k
 noremap k j
 noremap j h
@@ -65,8 +61,8 @@ map <LEADER>l <C-w>l
 map <LEADER>i <C-w>k
 map <LEADER>k <C-w>j
 map te :tabe<CR>
-map t- :-tabnext<CR>
-map t= :+tabnext<CR>
+map t- :tabp<CR>
+map t= :tabn<CR>
 
 map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
@@ -83,6 +79,9 @@ let Tlist_File_Fold_Auto_Close=1
 map qq :NERDTreeToggle<CR>
 let NERDTreeMapOpenSplit = ""
 let NERDTreeIgnore = ['\.so','\.o']
+
+let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_enable_at_startup = 1
 
 
 " ==
@@ -106,63 +105,58 @@ let g:delimitMate_expand_cr = 1
 
 "ctrlp
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o     " MacOSX/Linux"
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
 
-call plug#begin('~/.vim/plugged')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 "=======plug
-Plug 'vim-airline/vim-airline'
-"Plug 'connorholyday/vim-snazzy'
-"Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
 
 " File navigation
- Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
- Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plugin 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+ Plugin 'Xuyuanp/nerdtree-git-Plug'
 " Taglist
- Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
+ Plugin 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 " Auto Complete
- Plug 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplcache.vim'
 " Error checking
- Plug 'w0rp/ale' 
+ Plugin 'w0rp/ale' 
 " Undo Tree
- Plug 'mbbill/undotree/'
+ "Plugin 'mbbill/undotree/'
 " Other visual enhancement
- Plug 'nathanaelkane/vim-indent-guides'
- Plug 'itchyny/vim-cursorword'
+ Plugin 'nathanaelkane/vim-indent-guides'
+ Plugin 'itchyny/vim-cursorword'
 
+"goland
+ "Plugin 'fatih/vim-go'
 " Git
- Plug 'rhysd/conflict-marker.vim'
- Plug 'tpope/vim-fugitive'
- Plug 'mhinz/vim-signify'
- Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+ Plugin 'rhysd/conflict-marker.vim'
+ Plugin 'tpope/vim-fugitive'
+ Plugin 'mhinz/vim-signify'
+ Plugin 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-Plug'] }
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
-" Plug 'elzr/vim-json'
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-" Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html','javascript', 'css', 'less'] }
-" Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-" Plug 'mattn/emmet-vim'
 
  " Python
- Plug 'vim-scripts/indentpython.vim'
+ Plugin 'vim-scripts/indentpython.vim'
  
  "format
- Plug 'Chiel92/vim-autoformat'
- Plug 'Raimondi/delimitMate'
+ Plugin 'Chiel92/vim-autoformat'
+ Plugin 'Raimondi/delimitMate'
  "search
- Plug 'rking/ag.vim'
+ Plugin 'rking/ag.vim'
  "others
- Plug 'kien/ctrlp.vim'
-call plug#end()
+ Plugin 'kien/ctrlp.vim'
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-"let g:SnazzyTransparent = 1
+let g:SnazzyTransparent = 1
 let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
