@@ -29,7 +29,7 @@ set expandtab
 set number
 set autoindent
 set cindent
-"set tags=./tags,tags;$HOME
+set tags=./tags,tags;$HOME
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
 
 noremap i k
@@ -105,12 +105,96 @@ let g:delimitMate_expand_cr = 1
 
 "ctrlp
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o     " MacOSX/Linux"
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
+
+"======vim-go=====
+"let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+"let g:go_autodetect_gopath = 1
+"let g:go_list_type = "quickfix"
+"let g:go_version_warning = 1
+"let g:go_highlight_types = 1
+"let g:go_highlight_fields = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_function_calls = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_extra_types = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_generate_tags = 1
+"let g:godef_split=2
+"let g:go_doc_keywordprg_enabled = 0
+
+"====code format====
+let g:clang_format#command = 'clang-format'
+nmap <F4> :ClangFormat<cr>
+"autocmd FileType c ClangFormatAutoEnable
+"autocmd FileType cpp ClangFormatAutoEnable
+"autocmd FileType h ClangFormatAutoEnable
+let g:clang_format#detect_style_file = 0
+
+let g:clang_format#style_options = {
+        \ "Language" : "Cpp",
+        \ "BasedOnStyle" : "Google",
+        \ "AccessModifierOffset" : -1,
+        \ "AlignAfterOpenBracket" : "true",
+        \ "AlignEscapedNewlinesLeft" : "true",
+        \ "AlignOperands" : "true",
+        \ "AlignTrailingComments" : "true",
+        \ "AllowAllParametersOfDeclarationOnNextLine" : "true",
+        \ "AllowShortBlocksOnASingleLine" : "false",
+        \ "AllowShortCaseLabelsOnASingleLine" : "false",
+        \ "AllowShortIfStatementsOnASingleLine" : "true",
+        \ "AllowShortLoopsOnASingleLine" : "true",
+        \ "AllowShortFunctionsOnASingleLine" : "All",
+        \ "AlwaysBreakAfterDefinitionReturnType" : "false",
+        \ "AlwaysBreakTemplateDeclarations" : "true",
+        \ "AlwaysBreakBeforeMultilineStrings" : "true",
+        \ "BreakBeforeBinaryOperators" : "None",
+        \ "BreakBeforeTernaryOperators" : "true",
+        \ "BreakConstructorInitializersBeforeComma" : "false",
+        \ "BinPackParameters" : "true",
+        \ "BinPackArguments" : "true",
+        \ "ColumnLimit" : 100,
+        \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
+        \ "ConstructorInitializerIndentWidth" : 4,
+        \ "DerivePointerAlignment" : "true",
+        \ "ExperimentalAutoDetectBinPacking" : "false",
+        \ "IndentCaseLabels" : "true",
+        \ "IndentWrappedFunctionNames" : "false",
+        \ "IndentFunctionDeclarationAfterType" : "false",
+        \ "MaxEmptyLinesToKeep" : 1,
+        \ "KeepEmptyLinesAtTheStartOfBlocks" : "false",
+        \ "NamespaceIndentation" : "None",
+        \ "ObjCBlockIndentWidth" : 2,
+        \ "ObjCSpaceAfterProperty" : "false",
+        \ "ObjCSpaceBeforeProtocolList" : "false",
+        \ "PenaltyBreakBeforeFirstCallParameter" : 1,
+        \ "PenaltyBreakComment" : 300,
+        \ "PenaltyBreakString" : 1000,
+        \ "PenaltyBreakFirstLessLess" : 120,
+        \ "PenaltyExcessCharacter" : 1000000,
+        \ "PenaltyReturnTypeOnItsOwnLine" : 200,
+        \ "PointerAlignment" : "Left",
+        \ "SpacesBeforeTrailingComments" : 2,
+        \ "Cpp11BracedListStyle" : "true",
+        \ "Standard" : "Auto",
+        \ "IndentWidth" : 2,
+        \ "TabWidth" : 8,
+        \ "UseTab" : "Never",
+        \ "BreakBeforeBraces" : "Attach",
+        \ "SpacesInParentheses" : "false",
+        \ "SpacesInSquareBrackets" : "false",
+        \ "SpacesInAngles" : "false",
+        \ "SpaceInEmptyParentheses" : "false",
+        \ "SpacesInCStyleCastParentheses" : "false",
+        \ "SpaceAfterCStyleCast" : "false",
+        \ "SpacesInContainerLiterals" : "true",
+        \ "SpaceBeforeAssignmentOperators" : "true",
+        \ "ContinuationIndentWidth" : 4 }
+
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -128,27 +212,26 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/neocomplcache.vim'
 " Error checking
  Plugin 'w0rp/ale' 
-" Undo Tree
- "Plugin 'mbbill/undotree/'
 " Other visual enhancement
- Plugin 'nathanaelkane/vim-indent-guides'
+ "Plugin 'nathanaelkane/vim-indent-guides'
  Plugin 'itchyny/vim-cursorword'
 
 "goland
  "Plugin 'fatih/vim-go'
 " Git
- Plugin 'rhysd/conflict-marker.vim'
- Plugin 'tpope/vim-fugitive'
- Plugin 'mhinz/vim-signify'
- Plugin 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-Plug'] }
+ "Plugin 'rhysd/conflict-marker.vim'
+ "Plugin 'tpope/vim-fugitive'
+ "Plugin 'mhinz/vim-signify'
+ "Plugin 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-Plug'] }
 
 
  " Python
  Plugin 'vim-scripts/indentpython.vim'
  
  "format
- Plugin 'Chiel92/vim-autoformat'
+ "Plugin 'Chiel92/vim-autoformat'
  Plugin 'Raimondi/delimitMate'
+ Plugin 'rhysd/vim-clang-format'
  "search
  Plugin 'rking/ag.vim'
  "others
